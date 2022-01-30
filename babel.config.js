@@ -1,0 +1,25 @@
+module.exports = {
+  presets: ["next/babel"],
+  plugins: [["babel-plugin-styled-components", {"ssr": true, "displayName": true, "preprocess": false}]],
+  env: {
+    development : {
+      presets: ["next/babel"],
+      plugins: [
+        [
+          "babel-plugin-styled-components", {"ssr": true, "displayName": true, "preprocess": false}
+        ]
+      ]
+    },
+    production: {
+      plugins: [
+        [
+          "babel-plugin-styled-components", {"ssr": true, "displayName": true, "preprocess": false}
+        ]
+      ],
+      presets: ["next/babel"],
+    },
+    test: {
+      presets: ["next/babel"]
+    }
+  }
+}
