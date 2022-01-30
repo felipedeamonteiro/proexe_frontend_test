@@ -20,7 +20,7 @@ const DashboardModal: React.FC<ModalProps> = ({ setShowModal, showModal }) => {
 
   return (
     <>
-      <Modal show={showModal}>
+      <Modal show={showModal} centered>
         <Modal.Header>
           <h2>Delete</h2>
         </Modal.Header>

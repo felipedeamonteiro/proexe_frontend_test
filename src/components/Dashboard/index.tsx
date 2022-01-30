@@ -12,6 +12,10 @@ const Dashboard: React.FC = () => {
     router.push('/add-new-user');
   };
 
+  const handleEdit = () => {
+    router.push('/edit-user');
+  }
+
   const handleDelete = () => {
     setShowModal(true);
   };
@@ -48,7 +52,7 @@ const Dashboard: React.FC = () => {
                 <td>johnsmith</td>
                 <td>johnsmith@mail.com</td>
                 <td>NYC</td>
-                <td><Button  variant="warning">Edit</Button></td>
+                <td><Button onClick={handleEdit} variant="warning">Edit</Button></td>
                 <td><Button onClick={handleDelete} variant="danger">Delete</Button></td>
               </tr>
               <tr>
@@ -57,7 +61,7 @@ const Dashboard: React.FC = () => {
                 <td>johndoe</td>
                 <td>johndoe@mail.com</td>
                 <td>LA</td>
-                <td><Button variant="warning">Edit</Button></td>
+                <td><Button onClick={handleEdit} variant="warning">Edit</Button></td>
                 <td><Button onClick={handleDelete} variant="danger">Delete</Button></td>
               </tr>
             </tbody>
