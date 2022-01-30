@@ -1,34 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Hiring Test - Proexe - Frontend
 
-## Getting Started
+This is a frontend aplication to the frontend developer job at the company Proexe
 
-First, run the development server:
+## - Specifications and technologies used here
 
-```bash
-npm run dev
-# or
+This project was built using `React` with `Typescript`.
+
+Here, `node` version is `12.16.3` and the package manager used is `yarn` in version `1.22.5`. To run the project they have to be downloaded. [Yarn](https://classic.yarnpkg.com/lang/en/) and I recommend installing Node via [NVM](https://github.com/nvm-sh/nvm). All instructions are in the links to install them.
+
+## - How to run the project
+
+After downloading the code from the repository, run `yarn` to install all the dependencies.
+
+After that:
+
+```
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## The application
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+It's a Soccer squad manager (looks like a little [`Cartola FC`](https://globoesporte.globo.com/cartola-fc/) from Brazil) and you can create teams with lots of descriptions and 10 different field formations. You can choose any player in the world informing its original team and country. These information are real and is acquired from the demo API [https://www.api-football.com/](https://www.api-football.com/).
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Descriptions of the tasks for this project can be seen here on this [board](https://trello.com/invite/b/9kzEclDG/e18b42f36ab9cbf4bab60431d74da372/teste-venturus-frontend-e-backend).
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## - Accessing the project in production
 
-## Learn More
+This project is hosted in an account in [Vercel](https://vercel.com/), and can be accessed here in this [link](https://venturus-frontend-test-2020.vercel.app/).
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Enjoy!
