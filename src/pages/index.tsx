@@ -1,10 +1,12 @@
 import type { NextPage } from 'next';
-import Dashboard from '../components/Dashboard';
+import AppHome from './dashboard';
+import { Provider } from 'react-redux';
+import store from '../store';
 
 const Home: NextPage = () => (
-  <>
-    <Dashboard />
-  </>
+  <Provider store={store}>
+    <AppHome />
+  </Provider>
 )
 
 export default Home

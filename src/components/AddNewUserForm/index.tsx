@@ -7,11 +7,11 @@ const AddNewUserForm: React.FC = () => {
   const router = useRouter();
 
   const handleSubmit = () => {
-    router.push('/');
+    router.push('/dashboard');
   }
 
   const handleCancel = () => {
-    router.push('/');
+    router.push('/dashboard');
   }
 
   return (
