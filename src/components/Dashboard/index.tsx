@@ -11,11 +11,9 @@ import useUserDataService from '../../hooks/useUserDataService';
 const Dashboard: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [idToDelete, setIdToDelete] = useState<number>(0);
   const router = useRouter();
-  const usersData = useSelector((state: any) => {
-    console.log('useSelector state', state)
-    return state.userData.users
-  });
+  const usersData = useSelector((state: any) => state.userData.users);
   const dispatch = useDispatch();
   const { getUsersData } = useUserDataService();
 
@@ -33,19 +31,21 @@ const Dashboard: React.FC = () => {
         console.error('Something is wrong with the api request');
       }
     }
-    getData();
+    if (usersData.length === 0) {
+      getData();
+    }
   }, []);
-  console.log('usersData', usersData);
 
   const handleAddNew = () => {
     router.push('/add-new-user');
   };
 
-  const handleEdit = () => {
-    router.push('/edit-user');
+  const handleEdit = (id: number) => {
+    router.push(`/edit-user?id=${id}`);
   }
 
-  const handleDelete = () => {
+  const handleDelete = (id: number) => {
+    setIdToDelete(id)
     setShowModal(true);
   };
 
@@ -82,8 +82,8 @@ const Dashboard: React.FC = () => {
                   <td>{user.username}</td>
                   <td>{user.email}</td>
                   <td>{user.address.city}</td>
-                  <td><Button onClick={handleEdit} variant="warning">Edit</Button></td>
-                  <td><Button onClick={handleDelete} variant="danger">Delete</Button></td>
+                  <td><Button onClick={() => handleEdit(user.id)} variant="warning">Edit</Button></td>
+                  <td><Button onClick={() => handleDelete(user.id)} variant="danger">Delete</Button></td>
                 </tr>
               )) : (
                 <div className="spinner-div">
@@ -95,7 +95,7 @@ const Dashboard: React.FC = () => {
           </Table>
         </Card.Body>
       </Card>
-      <DashboardModal setShowModal={setShowModal} showModal={showModal} />
+      <DashboardModal setShowModal={setShowModal} showModal={showModal} idToDelete={idToDelete} />
     </Container>
   )
 }

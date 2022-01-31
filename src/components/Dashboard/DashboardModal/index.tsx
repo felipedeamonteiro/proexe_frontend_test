@@ -1,19 +1,22 @@
 import React from 'react';
-//import { Container } from './DashboardModal';
 import { Modal, Button } from 'react-bootstrap';
+import {useDispatch} from 'react-redux';
+import { removeUserAction } from '../../../store/modules/userData/actions';
 
 interface ModalProps {
   setShowModal: (showModal: boolean) => void;
   showModal: boolean;
+  idToDelete: number;
 }
 
-const DashboardModal: React.FC<ModalProps> = ({ setShowModal, showModal }) => {
-
+const DashboardModal: React.FC<ModalProps> = ({ setShowModal, showModal, idToDelete }) => {
+  const dispatch = useDispatch();
   const handleCancel = () => {
     setShowModal(false);
   }
 
   const handleDelete = () => {
+    dispatch(removeUserAction(idToDelete))
     alert('User Deleted');
     setShowModal(false);
   };

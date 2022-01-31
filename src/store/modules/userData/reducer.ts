@@ -19,8 +19,13 @@ const userData: Reducer<IUserState> = (state = INITIAL_STATE, action) => {
       case ActionTypes.addUserToTable: {
         const user = action.payload;
         draft.users.push({
-          ...user,
           id: state.users.length + 1,
+          name: user.name,
+          username: user.username,
+          email: user.email,
+          address: {
+            city: user.city,
+          },
         });
         break;
       }

@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.8.8",
     "@types/redux-saga": "^0.10.5",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "axios": "^0.25.0",
@@ -20,10 +21,12 @@
     "react": "17.0.2",
     "react-bootstrap": "^2.1.1",
     "react-dom": "17.0.2",
+    "react-hook-form": "^7.25.3",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/node": "^17.0.13",
