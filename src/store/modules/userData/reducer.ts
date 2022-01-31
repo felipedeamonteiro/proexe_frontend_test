@@ -50,7 +50,15 @@ const userData: Reducer<IUserState> = (state = INITIAL_STATE, action) => {
           draft.users.splice(userIndex, 1);
         }
 
-        draft.users.push(user);
+        draft.users.push({
+          id: user.id,
+          name: user.name,
+          username: user.username,
+          email: user.email,
+          address: {
+            city: user.city,
+          },
+        });
         break;
       }
 

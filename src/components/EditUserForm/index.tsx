@@ -33,33 +33,37 @@ const EditUserForm: React.FC = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const usersData = useSelector((state: any) => state.userData.users);
-  const { control, handleSubmit, formState: { errors } } = useForm<IFormInput>({
-    resolver: yupResolver(schema)
-  });
+  const { control, handleSubmit, formState: { errors } } = useForm<IFormInput>();
 
   console.log('usersData', usersData);
+  const { id } = router.query;
 
   useEffect(() => {
-    const { id } = router.query;
     const userToBeUpdated = usersData.find((user: any) => user.id === Number(id));
     setCurrentUserData(userToBeUpdated);
     setDefaultValueStateName(currentUserData.name)
     setDefaultValueStateEmail(currentUserData.email);
     setDefaultValueStateUsername(currentUserData.username);
-    setDefaultValueStateCity(currentUserData.address.city);
+    setDefaultValueStateCity(currentUserData?.address?.city);
   }, []);
 
   const handleSubmitButton: SubmitHandler<IFormInput> = (data) => {
-    dispatch(updateUserAction(data));
+    const completeData = {
+      id: id,
+      name: data.name,
+      username: data.username,
+      email: data.email,
+      address: {
+        city: data.city,
+      },
+    }
+    dispatch(updateUserAction(completeData));
     router.push('/dashboard');
   }
 
   const handleCancel = () => {
     router.push('/dashboard');
   }
-
-  console.log('currentUserData', currentUserData);
-  console.log('error', errors);
 
   return (
     <Container>
@@ -75,12 +79,12 @@ const EditUserForm: React.FC = () => {
           <Controller
               name="name"
               control={control}
-              defaultValue=""
+              defaultValue=''
               render={({ field }) => (
                 <Form.Group className="input-container" controlId="formBasicName">
                   <Form.Label style={{ fontWeight: 'bold', marginBottom: '20px' }}>Name</Form.Label>
                   <div className="input-div">
-                    <Form.Control {...field} onChange={e => setDefaultValueStateName(e.target.value)} value={defaultValueStateName} type="text" placeholder="Enter name" />
+                    <Form.Control {...field} type="text" placeholder="Enter name" />
                     {errors.name ? <span>Name required</span> : <span style={{ visibility: 'hidden' }}>Name required</span>}
                   </div>
                 </Form.Group>
@@ -90,12 +94,12 @@ const EditUserForm: React.FC = () => {
             <Controller
               name="email"
               control={control}
-              defaultValue={currentUserData?.email ? currentUserData.email : ''}
+              defaultValue=''
               render={({ field }) => (
                 <Form.Group className="input-container" controlId="formBasicEmail">
                   <Form.Label style={{ fontWeight: 'bold', marginBottom: '20px' }}>Email</Form.Label>
                   <div className="input-div">
-                    <Form.Control {...field} onChange={e => setDefaultValueStateEmail(e.target.value)} value={defaultValueStateEmail} type="text" placeholder="Enter email" />
+                    <Form.Control {...field} type="text" placeholder="Enter email" />
                     {errors.email ? <span>Email required</span> : <span style={{ visibility: 'hidden' }}>Email required</span>}
                   </div>
                 </Form.Group>
@@ -105,12 +109,12 @@ const EditUserForm: React.FC = () => {
             <Controller
               name="username"
               control={control}
-              defaultValue={currentUserData?.username ? currentUserData.username : ''}
+              defaultValue=''
               render={({ field }) => (
                 <Form.Group className="input-container" controlId="formBasicUsername">
                   <Form.Label style={{ fontWeight: 'bold', marginBottom: '20px' }}>Username</Form.Label>
                   <div className="input-div">
-                    <Form.Control {...field} onChange={e => setDefaultValueStateUsername(e.target.value)} value={defaultValueStateUsername} type="text" placeholder="Enter username" />
+                    <Form.Control {...field} type="text" placeholder="Enter username" />
                     {errors.username ? <span>Username required</span>  : <span style={{ visibility: 'hidden' }}>Username required</span>}
                   </div>
                 </Form.Group>
@@ -120,12 +124,12 @@ const EditUserForm: React.FC = () => {
             <Controller
               name="city"
               control={control}
-              defaultValue={currentUserData?.address?.city ? currentUserData.address.city : ''}
+              defaultValue=''
               render={({ field }) => (
                 <Form.Group className="input-container" controlId="formBasicCity">
                   <Form.Label style={{ fontWeight: 'bold', marginBottom: '20px' }}>City</Form.Label>
                   <div className="input-div">
-                    <Form.Control {...field} onChange={e => setDefaultValueStateCity(e.target.value)} value={defaultValueStateCity} type="text" placeholder="Enter city" />
+                    <Form.Control {...field} type="text" placeholder="Enter city" />
                     {errors.city ? <span>City required</span> : <span style={{ visibility: 'hidden' }}>City required</span>}
                   </div>
                 </Form.Group>
