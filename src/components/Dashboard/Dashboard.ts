@@ -22,4 +22,35 @@ export const Container = styled.div`
     align-items: center;
     flex-direction: row;
   }
+
+  .card {
+    .card-body {
+      table {
+        thead {
+          tr {
+            th {
+              padding: 15px;
+              text-align: center;
+            }
+          }
+        }
+        tbody {
+          tr {
+            td {
+              padding: 15px;
+              text-align: center;
+            }
+          }
+
+          .spinner-div {
+            margin: 10px 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
 `;

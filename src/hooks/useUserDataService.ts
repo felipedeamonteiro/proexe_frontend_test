@@ -3,10 +3,10 @@ import api from '../services/api';
 
 const useUserDataService = () => {
 
-  const getUsersData = useCallback(async () => {
-    const response = await api.get('');
+  const getUsersData = async () => {
+    const response = await api.get('/data');
     return response.data;
-  }, []);
+  };
 
   return {getUsersData};
 }

@@ -1,7 +1,8 @@
 export enum ActionTypes {
-  addUserToTable = 'ADD_USER_TO_TABLE',
-  removeUserFromTable = 'REMOVE_USER_FROM_TABLE',
-  updateUserInfo = 'UPDATE_USER_INFO',
+  addUsersToState = '@usersData/ADD_USER_TO_STATE',
+  addUserToTable = '@usersData/ADD_USER_TO_TABLE',
+  removeUserFromTable = '@usersData/REMOVE_USER_FROM_TABLE',
+  updateUserInfo = '@usersData/UPDATE_USER_INFO',
 }
 
 export interface IUser {
@@ -9,9 +10,11 @@ export interface IUser {
   name: string;
   username: string;
   email: string;
-  city: string;
+  address: {
+    city: string;
+  }
 }
 
-export interface ITableState {
+export interface IUserState {
   users: IUser[];
 }

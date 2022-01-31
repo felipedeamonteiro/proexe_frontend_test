@@ -1,12 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from './Dashboard';
 import { useRouter } from 'next/router';
-import { Table, Card, Button } from 'react-bootstrap';
+import { Table, Card, Button, Spinner } from 'react-bootstrap';
 import DashboardModal from './DashboardModal';
+import { useSelector, useDispatch } from 'react-redux';
+import { IUser } from '../../store/modules/userData/types';
+import { addUsersToState } from '../../store/modules/userData/actions';
+import useUserDataService from '../../hooks/useUserDataService';
 
 const Dashboard: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
+  const usersData = useSelector((state: any) => {
+    console.log('useSelector state', state)
+    return state.userData.users
+  });
+  const dispatch = useDispatch();
+  const { getUsersData } = useUserDataService();
+
+  console.log('usersData', usersData);
+
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true);
+      const response = await getUsersData();
+      if (response) {
+        dispatch(addUsersToState(response));
+        setLoading(false);
+      } else {
+        setLoading(false);
+        console.error('Something is wrong with the api request');
+      }
+    }
+    getData();
+  }, []);
+  console.log('usersData', usersData);
 
   const handleAddNew = () => {
     router.push('/add-new-user');
@@ -46,24 +75,22 @@ const Dashboard: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>12</td>
-                <td>John Smith</td>
-                <td>johnsmith</td>
-                <td>johnsmith@mail.com</td>
-                <td>NYC</td>
-                <td><Button onClick={handleEdit} variant="warning">Edit</Button></td>
-                <td><Button onClick={handleDelete} variant="danger">Delete</Button></td>
-              </tr>
-              <tr>
-                <td>15</td>
-                <td>John Doe</td>
-                <td>johndoe</td>
-                <td>johndoe@mail.com</td>
-                <td>LA</td>
-                <td><Button onClick={handleEdit} variant="warning">Edit</Button></td>
-                <td><Button onClick={handleDelete} variant="danger">Delete</Button></td>
-              </tr>
+              {!loading ? usersData.map((user: IUser, index: number) => (
+                <tr key={index}>
+                  <td>{user.id}</td>
+                  <td>{user.name}</td>
+                  <td>{user.username}</td>
+                  <td>{user.email}</td>
+                  <td>{user.address.city}</td>
+                  <td><Button onClick={handleEdit} variant="warning">Edit</Button></td>
+                  <td><Button onClick={handleDelete} variant="danger">Delete</Button></td>
+                </tr>
+              )) : (
+                <div className="spinner-div">
+                  <Spinner animation="border" variant="info" />
+                  <span>Loading...</span>
+                </div>
+              )}
             </tbody>
           </Table>
         </Card.Body>
